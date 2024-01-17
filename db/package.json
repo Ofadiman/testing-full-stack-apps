@@ -1,0 +1,14 @@
+{
+  "name": "db",
+  "scripts": {
+    "db:init": "ts-node seed.ts",
+    "db:start": "json-server --watch db.json"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@types/node": "^20.11.5",
+    "json-server": "0.17.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
