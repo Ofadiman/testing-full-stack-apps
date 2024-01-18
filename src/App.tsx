@@ -21,7 +21,7 @@ const wait = (milliseconds: number) =>
 
 const getPosts = async (): Promise<Post[]> => {
   await wait(500);
-  return fetch("http://localhost:3000/posts")
+  return fetch("http://0.0.0.0:3000/posts")
     .then((response) => response.json())
     .then((json) => json);
 };

@@ -2,7 +2,7 @@
   "name": "db",
   "scripts": {
     "db:init": "ts-node seed.ts",
-    "db:start": "json-server --watch db.json"
+    "db:start": "json-server --watch db.json --host=0.0.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",

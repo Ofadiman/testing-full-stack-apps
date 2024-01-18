@@ -2,9 +2,10 @@
   "name": "cypressing-react",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -20,6 +21,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "cypress": "^13.6.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
