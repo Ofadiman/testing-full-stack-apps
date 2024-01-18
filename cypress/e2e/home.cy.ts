@@ -1,14 +1,6 @@
-describe("home page", () => {
-  beforeEach(() => {
-    cy.exec("(cd ./db/ && pnpm db:init)");
-  });
-
-  it("should open home page", () => {
+describe("login page", () => {
+  it("should open login page", () => {
     cy.visit("/");
-  });
-
-  it("should render cards", () => {
-    cy.visit("/");
-    cy.get('[data-cy="card"]').should("have.length", 10);
+    cy.contains("login").should("exist");
   });
 });
