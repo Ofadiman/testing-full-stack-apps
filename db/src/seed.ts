@@ -2,6 +2,8 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { faker } from "@faker-js/faker";
 
+console.log(`seeding database`);
+
 faker.seed(1);
 
 const posts = [];
@@ -18,3 +20,5 @@ writeFileSync(
   join(process.cwd(), "db.json"),
   JSON.stringify({ posts }, null, 2),
 );
+
+console.log(`seeding finished`);
