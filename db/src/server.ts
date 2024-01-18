@@ -12,7 +12,6 @@ server.use(jsonServer.defaults());
 server.use(jsonServer.bodyParser);
 
 server.use((req, res, next) => {
-  console.log(`req.path: ${req.path}`);
   if (req.path.startsWith("/health") || req.path.startsWith("/login")) {
     next();
     return;

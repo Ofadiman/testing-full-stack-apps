@@ -14,34 +14,43 @@ type Post = {
   likes: number;
 };
 
-const wait = (milliseconds: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
-  });
-
 const getPosts = async (): Promise<Post[]> => {
-  await wait(500);
   const response = await fetch("http://0.0.0.0:3000/posts", {
     headers: {
-      Authorization: "d7720048-d6a0-4a6e-a32f-3900e266be9a",
+      Authorization: window.localStorage.getItem("token")!,
     },
   });
-  const json = await response.json();
-  if (![200, 201].includes(response.status)) {
-    throw new Error(json);
+
+  if (!response.ok) {
+    throw new Error("error from getPosts");
   }
 
-  return json;
+  return response.json();
+  // const json = await response.json();
+  // if (![200, 201].includes(response.status)) {
+  //   throw new Error("something went wrong");
+  // }
+  //
+  // return json;
 };
 
 export function Posts() {
-  const query = useQuery("todos", getPosts);
+  // const query = useQuery("posts", getPosts, {
+  const query = useQuery({
+    queryFn: getPosts,
+    queryKey: ["posts"],
+    retry: false,
+    onError: () => {
+      console.error(`error occured`);
+    },
+  });
 
+  console.log(query);
   if (query.isLoading) {
     return <div>loading...</div>;
   }
 
-  if (query.isError || query.data === undefined) {
+  if (query.isError) {
     return <div>error...</div>;
   }
 
