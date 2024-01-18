@@ -23,7 +23,8 @@ server.use((req, res, next) => {
     return;
   }
 
-  res.sendStatus(401);
+  res.status(401);
+  res.send({ error: "unauthorized" });
 });
 
 server.get("/health", (_req, res) => {
@@ -38,7 +39,9 @@ server.post("/login", (req, res) => {
     res.jsonp({ token: user.token });
     return;
   }
-  res.sendStatus(401);
+
+  res.status(401);
+  res.send({ error: "unauthorized" });
 });
 
 server.use(jsonServer.router("db.json"));

@@ -21,12 +21,20 @@ const wait = (milliseconds: number) =>
 
 const getPosts = async (): Promise<Post[]> => {
   await wait(500);
-  return fetch("http://0.0.0.0:3000/posts")
-    .then((response) => response.json())
-    .then((json) => json);
+  const response = await fetch("http://0.0.0.0:3000/posts", {
+    headers: {
+      Authorization: "d7720048-d6a0-4a6e-a32f-3900e266be9a",
+    },
+  });
+  const json = await response.json();
+  if (![200, 201].includes(response.status)) {
+    throw new Error(json);
+  }
+
+  return json;
 };
 
-function App() {
+export function Posts() {
   const query = useQuery("todos", getPosts);
 
   if (query.isLoading) {
@@ -53,5 +61,3 @@ function App() {
     </Grid>
   );
 }
-
-export default App;
