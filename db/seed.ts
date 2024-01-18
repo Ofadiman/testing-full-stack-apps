@@ -2,6 +2,8 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { faker } from "@faker-js/faker";
 
+faker.seed(1);
+
 const posts = [];
 for (let i = 0; i < 10; i++) {
   posts.push({

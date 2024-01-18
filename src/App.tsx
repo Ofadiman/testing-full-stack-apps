@@ -42,7 +42,7 @@ function App() {
       {query.data.map((post) => {
         return (
           <Grid xs={12} sm={6} md={4} lg={3} xl={2} key={post.id}>
-            <Card sx={{ height: "100%" }}>
+            <Card sx={{ height: "100%" }} data-cy={"card"}>
               <CardHeader title={post.title}></CardHeader>
               <CardContent>{post.content}</CardContent>
               <CardActions>Likes: {post.likes}</CardActions>
