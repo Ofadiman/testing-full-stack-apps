@@ -7,9 +7,8 @@ export function ErrorPage() {
     <div id="error-page">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{(error as any).statusText || (error as any).message}</i>
-      </p>
+      <p>Status text: {(error as any).statusText}</p>
+      <p>Messag: {(error as any).message}</p>
     </div>
   );
 }
