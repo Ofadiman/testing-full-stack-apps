@@ -4,9 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "cypress:e2e:ci": "cypress run --e2e --browser chrome --headed",
-    "cypress:component:ci": "cypress run --component --browser chrome --headed",
-    "cypress:ci": "rimraf .nyc_output/ coverage/ && start-server-and-test dev http://localhost:5173 cypress:e2e:ci"
+    "test:cypress:e2e:ci": "cypress run --e2e --browser chrome --headed",
+    "test:cypress:component:ci": "cypress run --component --browser chrome --headed",
+    "test:cypress:ci": "rimraf .nyc_output/ coverage/ && start-server-and-test dev http://localhost:5173 test:cypress:e2e:ci && pnpm test:cypress:component:ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
