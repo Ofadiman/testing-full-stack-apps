@@ -20,3 +20,4 @@ The following commands are available to run tests:
 - `test:cypress:e2e:ci` - Run E2E tests and generate code coverage report for them.
 - `test:cypress:component:ci` - Run component tests and generate code coverage report for them.
 - `test:cypress:ci` - Remove code coverage artifacts from previous cypress runs, run E2E and component tests and generate code coverage report for them.
+- `test:report` - Open code coverage report in browser.
