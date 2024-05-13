@@ -1,3 +1,5 @@
+import React from "react";
+import "@cypress/code-coverage/support";
 import "./commands";
 
 import { mount } from "cypress/react18";

@@ -2,10 +2,10 @@
   "name": "cypressing-react",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "cypress:open": "cypress open"
+    "cypress:e2e:ci": "cypress run --e2e --browser chrome --headed",
+    "cypress:coverage:ci": "start-server-and-test dev http://localhost:5173 cypress:e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -22,11 +22,14 @@
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.12.39",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "cypress": "^13.6.3",
+    "start-server-and-test": "^2.0.3",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-istanbul": "^6.0.2"
   }
 }
