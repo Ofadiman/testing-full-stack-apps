@@ -14,6 +14,11 @@ const getPromiseWithExecutors = () => {
 };
 
 describe("posts page", () => {
+  it("should redirect to login page when token is not present in local storage", () => {
+    cy.visit("/posts");
+    cy.url().should("equal", "http://localhost:5173/");
+  });
+
   it("should show error when something goes wrong on the server", () => {
     const { resolve, promise } = getPromiseWithExecutors();
 
