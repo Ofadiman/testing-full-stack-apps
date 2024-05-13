@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "cypress:e2e:ci": "cypress run --e2e --browser chrome --headed",
-    "cypress:coverage:ci": "start-server-and-test dev http://localhost:5173 cypress:e2e"
+    "cypress:component:ci": "cypress run --component --browser chrome --headed",
+    "cypress:ci": "rimraf .nyc_output/ coverage/ && start-server-and-test dev http://localhost:5173 cypress:e2e:ci"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -27,6 +28,7 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "cypress": "^13.6.3",
+    "rimraf": "^5.0.7",
     "start-server-and-test": "^2.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",

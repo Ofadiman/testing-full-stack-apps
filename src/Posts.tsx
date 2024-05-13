@@ -26,16 +26,9 @@ const getPosts = async (): Promise<Post[]> => {
   }
 
   return response.json();
-  // const json = await response.json();
-  // if (![200, 201].includes(response.status)) {
-  //   throw new Error("something went wrong");
-  // }
-  //
-  // return json;
 };
 
 export function Posts() {
-  // const query = useQuery("posts", getPosts, {
   const query = useQuery({
     queryFn: getPosts,
     queryKey: ["posts"],
@@ -45,7 +38,6 @@ export function Posts() {
     },
   });
 
-  console.log(query);
   if (query.isLoading) {
     return <div>loading...</div>;
   }
@@ -56,17 +48,19 @@ export function Posts() {
 
   return (
     <Grid container spacing={2} padding={2} disableEqualOverflow>
-      {query.data.map((post) => {
-        return (
-          <Grid xs={12} sm={6} md={4} lg={3} xl={2} key={post.id}>
-            <Card sx={{ height: "100%" }} data-cy={"card"}>
-              <CardHeader title={post.title}></CardHeader>
-              <CardContent>{post.content}</CardContent>
-              <CardActions>Likes: {post.likes}</CardActions>
-            </Card>
-          </Grid>
-        );
-      })}
+      {query.data === undefined
+        ? "Data not available"
+        : query.data.map((post) => {
+            return (
+              <Grid xs={12} sm={6} md={4} lg={3} xl={2} key={post.id}>
+                <Card sx={{ height: "100%" }} data-cy={"card"}>
+                  <CardHeader title={post.title}></CardHeader>
+                  <CardContent>{post.content}</CardContent>
+                  <CardActions>Likes: {post.likes}</CardActions>
+                </Card>
+              </Grid>
+            );
+          })}
     </Grid>
   );
 }

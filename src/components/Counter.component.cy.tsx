@@ -4,7 +4,7 @@ import {
   DEFAULT_DECREMENT_BY,
   DEFAULT_INCREMENT_BY,
   DEFAULT_INITIAL_COUNT,
-} from "./Counter";
+} from "./Counter.component";
 
 const dataCy = (key: string) => `[data-cy="${key}"]`;
 
