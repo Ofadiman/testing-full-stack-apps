@@ -1,6 +1,5 @@
 import { defineConfig } from "cypress";
 import task from "@cypress/code-coverage/task";
-import vitePreprocessor from "cypress-vite";
 
 export default defineConfig({
   e2e: {
@@ -17,11 +16,9 @@ export default defineConfig({
       framework: "react",
       bundler: "vite",
     },
-    specPattern: ["**/*.component.cy.{ts,tsx}", "**/*.unit.{ts,tsx}"],
+    specPattern: "src/**/*.test.{ts,tsx}",
     setupNodeEvents(on, config) {
       task(on, config);
-
-      on("file:preprocessor", vitePreprocessor());
 
       return config;
     },
