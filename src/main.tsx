@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 
 import React, { FunctionComponent, PropsWithChildren } from "react";
 import ReactDOM from "react-dom/client";
-import { Posts } from "./Posts";
+import { Posts } from "./Posts.page";
 import { QueryClient, QueryClientProvider } from "react-query";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
@@ -13,8 +13,8 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { Login } from "./Login";
-import { ErrorPage } from "./ErrorPage";
+import { Login } from "./Login.page";
+import { ErrorPage } from "./Error.page";
 
 const queryClient = new QueryClient();
 
