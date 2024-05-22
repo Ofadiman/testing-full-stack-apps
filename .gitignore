@@ -25,4 +25,4 @@ dist-ssr
 
 # Test artifacts
 .nyc_output/
-coverage/
+coverage*
