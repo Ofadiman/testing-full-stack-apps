@@ -1,55 +1,55 @@
-import { Box, Button, Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography } from '@mui/material'
+import TextField from '@mui/material/TextField'
+import { useState } from 'react'
+import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const login = async (): Promise<{ token: string }> => {
-    const response = await fetch("http://0.0.0.0:3000/login", {
-      method: "POST",
+    const response = await fetch('http://0.0.0.0:3000/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
-    });
+    })
 
-    const json = await response.json();
+    const json = await response.json()
     if (![200, 201].includes(response.status)) {
-      throw new Error(json.error);
+      throw new Error(json.error)
     }
-    return json;
-  };
+    return json
+  }
 
   const mutation = useMutation(login, {
     onSuccess: (data: { token: string }) => {
-      window.localStorage.setItem("token", data.token);
-      navigate("/posts");
+      window.localStorage.setItem('token', data.token)
+      navigate('/posts')
     },
-  });
+  })
 
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
       }}
     >
       <Box
         autoComplete="off"
         component="form"
         noValidate
-        sx={{ display: "flex", flexFlow: "column" }}
+        sx={{ display: 'flex', flexFlow: 'column' }}
         onSubmit={(event) => {
-          event.preventDefault();
+          event.preventDefault()
 
-          mutation.mutate();
+          mutation.mutate()
         }}
       >
         <TextField
@@ -59,7 +59,7 @@ export const Login = () => {
           placeholder="username"
           value={username}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setUsername(event.target.value);
+            setUsername(event.target.value)
           }}
         ></TextField>
         <TextField
@@ -70,14 +70,12 @@ export const Login = () => {
           placeholder="password"
           value={password}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setPassword(event.target.value);
+            setPassword(event.target.value)
           }}
         ></TextField>
         <Button type="submit">Submit</Button>
-        {mutation.isError && (
-          <Typography>{(mutation.error as Error).message}</Typography>
-        )}
+        {mutation.isError && <Typography>{(mutation.error as Error).message}</Typography>}
       </Box>
     </Box>
-  );
-};
+  )
+}

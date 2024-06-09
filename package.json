@@ -4,7 +4,8 @@
   "packageManager": "pnpm@9.2.0",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "format": "turbo run format"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -26,6 +27,7 @@
     "@vitest/coverage-istanbul": "^1.6.0",
     "cypress": "^13.6.3",
     "nyc": "^15.1.0",
+    "prettier": "^3.3.1",
     "rimraf": "^5.0.7",
     "start-server-and-test": "^2.0.3",
     "turbo": "^2.0.3",

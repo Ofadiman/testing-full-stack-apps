@@ -1,47 +1,41 @@
-import {
-  Card,
-  Unstable_Grid2 as Grid,
-  CardActions,
-  CardContent,
-  CardHeader,
-} from "@mui/material";
-import { useQuery } from "react-query";
+import { Card, Unstable_Grid2 as Grid, CardActions, CardContent, CardHeader } from '@mui/material'
+import { useQuery } from 'react-query'
 
 type Post = {
-  id: string;
-  content: string;
-  title: string;
-  likes: number;
-};
+  id: string
+  content: string
+  title: string
+  likes: number
+}
 
 export function Posts() {
   const query = useQuery({
     queryFn: async (): Promise<Post[]> => {
-      const response = await fetch("http://0.0.0.0:3000/posts", {
+      const response = await fetch('http://0.0.0.0:3000/posts', {
         headers: {
-          Authorization: window.localStorage.getItem("token")!,
+          Authorization: window.localStorage.getItem('token')!,
         },
-      });
+      })
 
       if (!response.ok) {
-        throw new Error("error from getPosts");
+        throw new Error('error from getPosts')
       }
 
-      return response.json();
+      return response.json()
     },
-    queryKey: ["posts"],
+    queryKey: ['posts'],
     retry: false,
     onError: () => {
-      console.error(`error occured`);
+      console.error(`error occured`)
     },
-  });
+  })
 
   if (query.isLoading) {
-    return <div>loading...</div>;
+    return <div>loading...</div>
   }
 
   if (query.isError) {
-    return <div>error...</div>;
+    return <div>error...</div>
   }
 
   return (
@@ -49,14 +43,14 @@ export function Posts() {
       {query.data?.map((post) => {
         return (
           <Grid xs={12} sm={6} md={4} lg={3} xl={2} key={post.id}>
-            <Card sx={{ height: "100%" }} data-cy={"card"}>
+            <Card sx={{ height: '100%' }} data-cy={'card'}>
               <CardHeader title={post.title}></CardHeader>
               <CardContent>{post.content}</CardContent>
               <CardActions>Likes: {post.likes}</CardActions>
             </Card>
           </Grid>
-        );
+        )
       })}
     </Grid>
-  );
+  )
 }

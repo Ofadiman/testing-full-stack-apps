@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import istanbul from "vite-plugin-istanbul";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import istanbul from 'vite-plugin-istanbul'
 
 export default defineConfig({
   server: {
@@ -13,4 +13,4 @@ export default defineConfig({
       requireEnv: false,
     }),
   ],
-});
+})
