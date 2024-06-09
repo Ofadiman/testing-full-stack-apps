@@ -8,6 +8,7 @@ export const HomePage = () => {
     return (
       <div>
         <Navigation />
+        <p className="text-3xl">tailwind</p>
         <pre>{JSON.stringify(userQuery.data, null, 2)}</pre>
       </div>
     )
