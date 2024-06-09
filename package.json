@@ -1,15 +1,10 @@
 {
   "name": "cypressing-react",
   "type": "module",
+  "packageManager": "pnpm@9.2.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "test:report": "open coverage/lcov-report/index.html",
-    "test:clean": "rimraf .nyc_output/ coverage/",
-    "test:cypress:e2e:ci": "cypress run --e2e --browser chrome --headed",
-    "test:cypress:component:ci": "cypress run --component --browser chrome --headed",
-    "test:vitest:ci": "vitest run --coverage",
-    "test:coverage": "pnpm test:clean && start-server-and-test dev http://localhost:5173 test:cypress:e2e:ci && pnpm test:cypress:component:ci && pnpm test:vitest:ci"
+    "dev": "turbo run dev",
+    "build": "turbo run build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -33,9 +28,14 @@
     "nyc": "^15.1.0",
     "rimraf": "^5.0.7",
     "start-server-and-test": "^2.0.3",
+    "turbo": "^2.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-istanbul": "^6.0.2",
     "vitest": "^1.6.0"
+  },
+  "volta": {
+    "node": "22.2.0",
+    "pnpm": "9.2.0"
   }
 }
