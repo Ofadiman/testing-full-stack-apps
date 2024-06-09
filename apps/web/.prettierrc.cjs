@@ -6,4 +6,5 @@ module.exports = {
   quoteProps: 'as-needed',
   tabWidth: 2,
   trailingComma: 'all',
+  plugins: ['prettier-plugin-tailwindcss'],
 }
