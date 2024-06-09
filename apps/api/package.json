@@ -1,0 +1,9 @@
+{
+  "name": "@cypressing-react/api",
+  "type": "module",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "tsup",
+    "format": "prettier --write ."
+  }
+}
