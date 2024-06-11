@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    command: pnpm turbo run dev --filter=@cypressing-react/api
+    working_dir: /home/szymon/cypressing-react
+    volumes:
+      - ./:/home/szymon/cypressing-react
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    command: pnpm turbo run dev --filter=@cypressing-react/web
+    working_dir: /home/szymon/cypressing-react
+    volumes:
+      - ./:/home/szymon/cypressing-react
+  postgres:
+    image: docker.io/library/postgres:16.3-bookworm
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user

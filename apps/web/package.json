@@ -1,0 +1,9 @@
+{
+  "name": "@cypressing-react/web",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "format": "prettier --write ."
+  }
+}
