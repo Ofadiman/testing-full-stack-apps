@@ -9,3 +9,13 @@ services:
     working_dir: /home/szymon/cypressing-react
     volumes:
       - ./:/home/szymon/cypressing-react
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    command: pnpm turbo run dev --filter=@cypressing-react/web
+    working_dir: /home/szymon/cypressing-react
+    volumes:
+      - ./:/home/szymon/cypressing-react
