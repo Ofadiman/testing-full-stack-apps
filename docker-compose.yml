@@ -1,0 +1,11 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    command: pnpm turbo run dev --filter=@cypressing-react/api
+    working_dir: /home/szymon/cypressing-react
+    volumes:
+      - ./:/home/szymon/cypressing-react
