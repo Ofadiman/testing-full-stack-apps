@@ -19,3 +19,11 @@ services:
     working_dir: /home/szymon/cypressing-react
     volumes:
       - ./:/home/szymon/cypressing-react
+  postgres:
+    image: docker.io/library/postgres:16.3-bookworm
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
