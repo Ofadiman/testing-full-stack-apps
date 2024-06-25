@@ -3,22 +3,30 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     ports:
       - 3000:3000
     command: pnpm turbo run dev --filter=@cypressing-react/api
-    working_dir: /home/szymon/cypressing-react
+    working_dir: /home/developer/cypressing-react
     volumes:
-      - ./:/home/szymon/cypressing-react
+      - ./:/home/developer/cypressing-react
+
   web:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     ports:
       - 5173:5173
     command: pnpm turbo run dev --filter=@cypressing-react/web
-    working_dir: /home/szymon/cypressing-react
+    working_dir: /home/developer/cypressing-react
     volumes:
-      - ./:/home/szymon/cypressing-react
+      - ./:/home/developer/cypressing-react
+
   postgres:
     image: docker.io/library/postgres:16.3-bookworm
     ports:
