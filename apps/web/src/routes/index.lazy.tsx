@@ -1,5 +1,4 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { Navigation } from '@components/Navigation.component'
 import { trpc } from '../trpc'
 import { Button } from '@shadcn/button'
 
@@ -10,7 +9,6 @@ export const Route = createLazyFileRoute('/')({
     if (userQuery.data) {
       return (
         <div className="mx-10 flex flex-col gap-4">
-          <Navigation />
           <Button
             onClick={() => {
               console.log('shadcn button clicked')
@@ -26,7 +24,6 @@ export const Route = createLazyFileRoute('/')({
 
     return (
       <div>
-        <Navigation />
         <div>loading...</div>
       </div>
     )
