@@ -14,6 +14,7 @@ import { ErrorPage } from './Error.page'
 import { HomePage } from './pages/Home.page'
 import { trpc } from './trpc'
 import { httpBatchLink } from '@trpc/client'
+import { AuthPage } from '@pages/Auth.page'
 
 const queryClient = new QueryClient()
 const trpcClient = trpc.createClient({
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/auth',
+    element: <AuthPage />,
     errorElement: <ErrorPage />,
   },
   {

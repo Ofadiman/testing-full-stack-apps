@@ -12,6 +12,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@lib': path.resolve(__dirname, './src/lib'),
       '@shadcn': path.resolve(__dirname, './src/shadcn'),
+      '@pages': path.resolve(__dirname, './src/pages'),
     },
   },
   plugins: [
