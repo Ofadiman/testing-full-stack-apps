@@ -7,6 +7,8 @@ import {
 import { publicProcedure, router } from './trpc'
 import cors from '@fastify/cors'
 import { z } from 'zod'
+import { drizzlePlugin } from './plugins/drizzle.plugin'
+import { sql } from 'drizzle-orm'
 
 export const userSchema = z.object({
   id: z.number().int(),
@@ -100,7 +102,9 @@ const fastify = Fastify({
   logger: true,
 })
 
-fastify.register(cors, {})
+fastify.register(drizzlePlugin)
+
+fastify.register(cors)
 
 fastify.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
@@ -113,8 +117,9 @@ fastify.register(fastifyTRPCPlugin, {
   } satisfies FastifyTRPCPluginOptions<TrpcRouter>['trpcOptions'],
 })
 
-fastify.get('/health', function (_request, reply) {
-  reply.send({ status: 'ok' })
+fastify.get('/health', async function (_, reply) {
+  await fastify.drizzle.execute(sql`select 1;`)
+  reply.send({ server: 'ok', postgres: 'ok' })
 })
 
 fastify.listen({ host: '0.0.0.0', port: 3000 })
