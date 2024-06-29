@@ -21,6 +21,16 @@ export const Route = createRootRoute({
           <Link to="/auth" className="[&.active]:font-bold">
             Auth
           </Link>
+          <Link to="/posts" className="[&.active]:font-bold">
+            Posts
+          </Link>
+          <Link
+            to="/posts/$postId"
+            params={{ postId: 'a486f0d1-f961-40f9-b366-163c425e7ae7' }}
+            className="[&.active]:font-bold"
+          >
+            Post id
+          </Link>
         </div>
         <hr />
         <Outlet />
