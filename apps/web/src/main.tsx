@@ -4,17 +4,14 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
-import React, { FunctionComponent, PropsWithChildren } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Posts } from './Posts.page'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import CssBaseline from '@mui/material/CssBaseline'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
-import { ErrorPage } from './Error.page'
-import { HomePage } from './pages/Home.page'
 import { trpc } from './trpc'
 import { httpBatchLink } from '@trpc/client'
-import { AuthPage } from '@pages/Auth.page'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen'
 
 const queryClient = new QueryClient()
 const trpcClient = trpc.createClient({
@@ -25,43 +22,25 @@ const trpcClient = trpc.createClient({
   ],
 })
 
-const ProtectedRoute: FunctionComponent<PropsWithChildren> = (props) => {
-  const token = window.localStorage.getItem('token')
-  if (typeof token !== 'string') {
-    return <Navigate to={'/'} replace />
-  }
+const router = createRouter({ routeTree })
 
-  return props.children
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
 }
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/auth',
-    element: <AuthPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/posts',
-    element: (
-      <ProtectedRoute>
-        <Posts />
-      </ProtectedRoute>
-    ),
-  },
-])
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </trpc.Provider>
-    <CssBaseline />
-  </React.StrictMode>,
-)
+const rootElement = document.getElementById('root')
+if (rootElement && rootElement.innerHTML === '') {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <React.StrictMode>
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </trpc.Provider>
+      <CssBaseline />
+    </React.StrictMode>,
+  )
+}
