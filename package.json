@@ -84,6 +84,7 @@
     "@vitest/coverage-istanbul": "^1.6.0",
     "autoprefixer": "^10.4.19",
     "cypress": "^13.6.3",
+    "drizzle-kit": "^0.22.8",
     "nyc": "^15.1.0",
     "postcss": "^8.4.38",
     "prettier": "^3.3.1",

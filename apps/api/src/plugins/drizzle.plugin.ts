@@ -1,10 +1,11 @@
 import fp from 'fastify-plugin'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Client } from 'pg'
+import * as schema from './drizzle.schema'
 
 declare module 'fastify' {
   interface FastifyInstance {
-    drizzle: ReturnType<typeof drizzle>
+    drizzle: ReturnType<typeof drizzle<typeof schema>>
   }
 }
 
@@ -19,7 +20,9 @@ export const drizzlePlugin = fp(
     })
 
     await client.connect()
-    const db = drizzle(client)
+    const db = drizzle(client, {
+      schema,
+    })
 
     fastify.decorate('drizzle', db)
   },

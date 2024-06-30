@@ -4,6 +4,11 @@
   "main": "src/main.ts",
   "scripts": {
     "dev": "tsup",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "migrations:generate": "docker compose exec --workdir /home/developer/cypressing-react/apps/api api pnpm drizzle-kit generate",
+    "migrations:migrate": "docker compose exec --workdir /home/developer/cypressing-react/apps/api api pnpm drizzle-kit migrate"
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }

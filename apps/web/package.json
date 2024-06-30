@@ -5,5 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "format": "prettier --write ."
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }
