@@ -9,6 +9,7 @@ import cors from '@fastify/cors'
 import { z } from 'zod'
 import { drizzlePlugin } from './plugins/drizzle.plugin'
 import { sql } from 'drizzle-orm'
+import { authRouter } from './auth/auth.router'
 
 export const userSchema = z.object({
   id: z.number().int(),
@@ -41,6 +42,7 @@ export const homePagePostSchema = z
 export type HomePagePost = z.infer<typeof homePagePostSchema>
 
 const trpcRouter = router({
+  auth: authRouter,
   posts: {
     getPosts: publicProcedure.query(async (): Promise<HomePagePost[]> => {
       return [
@@ -90,13 +92,9 @@ const trpcRouter = router({
 
 export type TrpcRouter = typeof trpcRouter
 
-function createContext({ req, res }: CreateFastifyContextOptions) {
-  const user = { name: 'anonymous' }
-
-  return { req, res, user }
+export const createContext = ({ req, res }: CreateFastifyContextOptions) => {
+  return { req, res, user: null, drizzle: fastify.drizzle }
 }
-
-export type Context = Awaited<ReturnType<typeof createContext>>
 
 const fastify = Fastify({
   logger: true,
