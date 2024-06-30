@@ -3,9 +3,10 @@
   "type": "module",
   "packageManager": "pnpm@9.2.0",
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "format": "prettier package.json docker-compose.yml pnpm-workspace.yaml readme.md turbo.json --write && turbo run format"
+    "dev": "turbo run dev --continue",
+    "build": "turbo run build --continue",
+    "types": "turbo run types --continue",
+    "format": "prettier package.json docker-compose.yml pnpm-workspace.yaml readme.md turbo.json --write && turbo run format --continue"
   },
   "dependencies": {
     "@cypressing-react/api": "workspace:*",
