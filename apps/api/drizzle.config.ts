@@ -5,7 +5,8 @@ export default defineConfig({
   out: 'src/migrations/',
   dialect: 'postgresql',
   dbCredentials: {
-    host: 'postgres',
+    host: 'localhost',
+    port: 5432,
     user: 'user',
     password: 'password',
     database: 'postgres',

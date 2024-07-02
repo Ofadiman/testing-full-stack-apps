@@ -6,8 +6,8 @@
     "dev": "tsup",
     "format": "prettier --write .",
     "types": "tsc --noEmit",
-    "migrations:generate": "docker compose exec --workdir /home/ubuntu/cypressing-react/apps/api api pnpm drizzle-kit generate",
-    "migrations:migrate": "docker compose exec --workdir /home/ubuntu/cypressing-react/apps/api api pnpm drizzle-kit migrate"
+    "migrations:generate": "drizzle-kit generate",
+    "migrations:migrate": "drizzle-kit migrate"
   },
   "volta": {
     "extends": "../../package.json"
