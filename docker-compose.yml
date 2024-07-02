@@ -9,9 +9,9 @@ services:
     ports:
       - 3000:3000
     command: pnpm turbo run dev --filter=@cypressing-react/api
-    working_dir: /home/developer/cypressing-react
+    working_dir: /home/ubuntu/cypressing-react
     volumes:
-      - ./:/home/developer/cypressing-react
+      - ./:/home/ubuntu/cypressing-react
 
   web:
     build:
@@ -23,9 +23,9 @@ services:
     ports:
       - 5173:5173
     command: pnpm turbo run dev --filter=@cypressing-react/web
-    working_dir: /home/developer/cypressing-react
+    working_dir: /home/ubuntu/cypressing-react
     volumes:
-      - ./:/home/developer/cypressing-react
+      - ./:/home/ubuntu/cypressing-react
 
   postgres:
     image: docker.io/library/postgres:16.3-bookworm
@@ -35,3 +35,8 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
