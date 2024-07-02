@@ -1,8 +1,45 @@
-import { userForInsertSchema } from '../plugins/drizzle.schema'
+import { TRPCError } from '@trpc/server'
+import { userForInsertSchema, users } from '../plugins/drizzle.schema'
 import { publicProcedure, router } from '../trpc'
+import { hash, genSalt } from 'bcryptjs'
+import { eq } from 'drizzle-orm'
 
 export const authRouter = router({
   register: publicProcedure.input(userForInsertSchema).mutation(async (opts) => {
-    console.log(opts.ctx.user)
+    const [userByUsername] = await opts.ctx.drizzle
+      .select()
+      .from(users)
+      .where(eq(users.username, opts.input.username))
+    if (userByUsername) {
+      throw new TRPCError({ code: 'CONFLICT', message: 'user with that username already exists' })
+    }
+
+    const [userByEmail] = await opts.ctx.drizzle
+      .select()
+      .from(users)
+      .where(eq(users.email, opts.input.email))
+    if (userByEmail) {
+      throw new TRPCError({ code: 'CONFLICT', message: 'user with that email already exists' })
+    }
+
+    const salt = await genSalt(10)
+    const passwordHash = await hash(opts.input.password, salt)
+
+    const [user] = await opts.ctx.drizzle
+      .insert(users)
+      .values({
+        email: opts.input.email,
+        password: passwordHash,
+        username: opts.input.username,
+      })
+      .returning()
+
+    if (!user) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR' })
+    }
+
+    const { password, ...rest } = user
+
+    return rest
   }),
 })

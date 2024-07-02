@@ -3,10 +3,11 @@
   "type": "module",
   "packageManager": "pnpm@9.2.0",
   "scripts": {
-    "dev": "turbo run dev --continue",
     "build": "turbo run build --continue",
-    "types": "turbo run types --continue",
-    "format": "prettier package.json docker-compose.yml pnpm-workspace.yaml readme.md turbo.json --write && turbo run format --continue"
+    "dev": "turbo run dev --continue",
+    "format": "prettier package.json docker-compose.yml pnpm-workspace.yaml readme.md turbo.json --write && turbo run format --continue",
+    "shell": "docker compose exec -it api bash",
+    "types": "turbo run types --continue"
   },
   "dependencies": {
     "@cypressing-react/api": "workspace:*",
@@ -49,6 +50,7 @@
     "@trpc/client": "11.0.0-rc.396",
     "@trpc/react-query": "11.0.0-rc.396",
     "@trpc/server": "11.0.0-rc.396",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -79,6 +81,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@tanstack/router-devtools": "^1.43.2",
     "@tanstack/router-plugin": "^1.43.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/pg": "^8.11.6",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
