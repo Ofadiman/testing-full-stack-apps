@@ -4,8 +4,16 @@ meta {
   seq: 1
 }
 
-get {
-  url: 
-  body: none
+post {
+  url: http://localhost:3000/trpc/auth.register
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "username": "user",
+    "password": "password",
+    "email": "user@gmail.com"
+  }
 }

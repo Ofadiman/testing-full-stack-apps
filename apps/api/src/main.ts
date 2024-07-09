@@ -1,3 +1,5 @@
+import type { FastifyCookieOptions } from '@fastify/cookie'
+import cookie from '@fastify/cookie'
 import Fastify from 'fastify'
 import {
   fastifyTRPCPlugin,
@@ -10,6 +12,11 @@ import { z } from 'zod'
 import { drizzlePlugin } from './plugins/drizzle.plugin'
 import { sql } from 'drizzle-orm'
 import { authRouter } from './auth/auth.router'
+import jwt, { FastifyJwtNamespace } from '@fastify/jwt'
+
+declare module 'fastify' {
+  interface FastifyInstance extends FastifyJwtNamespace<{ namespace: 'security' }> {}
+}
 
 export const userSchema = z.object({
   id: z.number().int(),
@@ -93,7 +100,7 @@ const trpcRouter = router({
 export type TrpcRouter = typeof trpcRouter
 
 export const createContext = ({ req, res }: CreateFastifyContextOptions) => {
-  return { req, res, user: null, drizzle: fastify.drizzle }
+  return { req, res, user: null, drizzle: fastify.drizzle, jwt: fastify.jwt }
 }
 
 const fastify = Fastify({
@@ -103,6 +110,10 @@ const fastify = Fastify({
 fastify.register(drizzlePlugin)
 
 fastify.register(cors)
+
+fastify.register(cookie, { secret: 'cookie-secret' } satisfies FastifyCookieOptions)
+
+fastify.register(jwt, { secret: 'jwt-secret' })
 
 fastify.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
